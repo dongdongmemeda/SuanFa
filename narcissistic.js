@@ -13,6 +13,7 @@ function narcissistic(start, end){
 			const str = i.toString().split('')
 			let result = 0;
 			for(let j=0;j<str.length;j++){
+				//  字符串转数字
 				result += parseInt(str[j])**str.length
 			}
 			if(result===i){
@@ -22,5 +23,3 @@ function narcissistic(start, end){
 	}
 	return arr	
 }
-
-console.log(narcissistic(100, 1000)) 
