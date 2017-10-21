@@ -6,7 +6,7 @@
 
 //  一、一行代码篇
 //  1.函数实现统计字符串的字符数量，返回对象，参数为string
-(str=>str.split('').reduce((o, k)=>(o[k]++ || (o[k]=1), o ), {}))(/* 参数 */);
+(str=>str.split('').reduce((obj, key)=>(obj[key]++ || (obj[key]=1), obj), {}))(/* 参数 */);
 
 //  2.函数实现星级评标,0星到5星，小数四舍五入，参数为number
 (num=>5>=num && num>=0 && '★★★★★☆☆☆☆☆'.slice(5-Math.round(num), 10-Math.round(num)))(/* 参数 */);
