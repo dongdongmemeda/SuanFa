@@ -4,9 +4,8 @@
  *  desc: 冒泡排序
  */
 
-function maopao(arr){
+function maopaoSort(arr){
 	//  每轮i值减少一，排序比较的次数少一次，因为最后一位不用比较
-	console.time('maopao')
 	for(let i=arr.length-1; i>=0; i--){
 		//  比较次数随着i的大小变化
 		for(let j=0; j<i; j++){
@@ -17,6 +16,5 @@ function maopao(arr){
 			}
 		}
 	}
-	console.timeEnd('maopao')
 	return arr
 }
