@@ -1,7 +1,7 @@
 /**
  *  author: caidong
  *  createdOn: 2017/10/21
- *  desc: 有趣的js
+ *  desc: js黑科技
  */
 
 //  一、一行代码篇
