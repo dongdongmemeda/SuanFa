@@ -18,4 +18,4 @@
 (arr=>[...new Set(arr)])(/* 参数 */);
 
 //  5.函数实现长度为len且值都是val的数组，参数为(number， any)
-((len, val)=> len>=0 && Array(len | 0).fill(val))(/* 参数 */)
+((len, val)=> len>=0 && Array(len | 0).fill(val))(/* 参数 */);
