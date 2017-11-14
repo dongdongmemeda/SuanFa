@@ -10,6 +10,11 @@ function Queue(){
 }
 Queue.prototype = {
     constructor: Queue,
+    push: function(val){
+        this.data[this.dps++] = val
+        this.size = this.data.length
+        return this.data.toString()
+    },
     shift: function(){
         if(this.data.length>0){
             for(let i=0;i<this.data.length-1;i++){
@@ -18,15 +23,6 @@ Queue.prototype = {
             }
             this.size = --this.data.length
         }
-        return this.data.toString()
-    },
-    unshift: function(val){
-        this.data[this.size++] = undefined
-        for(let i=this.data.length-2;i>=0;i--){
-            let tmp = this.data[i]
-            this.data[i+1] = tmp
-        }
-        this.data[0] = val
         return this.data.toString()
     }
 }
