@@ -85,4 +85,5 @@ List.prototype = {
         }
     }
 }
+
 const list = new List()

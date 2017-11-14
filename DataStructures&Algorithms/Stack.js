@@ -23,4 +23,5 @@ Stack.prototype = {
         return this.data.toString()
     }
 }
+
 const stack = new Stack()

@@ -26,4 +26,5 @@ Queue.prototype = {
         return this.data.toString()
     }
 }
+
 const queue = new Queue()

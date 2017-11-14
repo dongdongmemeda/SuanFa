@@ -51,4 +51,5 @@ Link.prototype = {
         }
     }
 }
+
 const link = new Link()
