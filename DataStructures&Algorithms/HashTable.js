@@ -27,7 +27,7 @@ HashTable.prototype = {
     },
     show: function(){
         for(let i=0;i<this.table.length;i++){
-            if(this.table[i] != undefined){
+            if(this.table[i] !== undefined){
                 console.log(`${i}: ${this.table[i]}`)
             }
         }

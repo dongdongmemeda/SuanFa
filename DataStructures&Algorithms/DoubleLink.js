@@ -17,7 +17,7 @@ Link.prototype = {
     //  寻找节点
     find: function(item){
         let findNode = this.head
-        while(findNode.element != item){
+        while(findNode.element !== item){
             findNode = findNode.next
         }
         return findNode
@@ -32,7 +32,7 @@ Link.prototype = {
     //  删除节点
     remove: function(item){
         let findNode = this.find(item)
-        if(findNode.next != null){
+        if(findNode.next !== null){
             findNode.prev.next = findNode.next
             findNode.next.prev = findNode.prev
             //  断开与其他节点的联系
@@ -43,7 +43,7 @@ Link.prototype = {
     //  寻找末尾节点
     findLast: function(){
         let findNode = this.head
-        while(findNode.next != null){
+        while(findNode.next !== null){
             findNode = findNode.next
         }
         return findNode
@@ -52,7 +52,7 @@ Link.prototype = {
     disReverse: function(){
         let findNode = this.head
         findNode = this.findLast()
-        while(findNode.prev != null){
+        while(findNode.prev !== null){
             console.log(findNode.element)
             findNode = findNode.prev
         }
@@ -60,7 +60,7 @@ Link.prototype = {
     //  测试代码，从头结点开始显示节点
     display: function(){
         let findNode = this.head
-        while(findNode.next != null){
+        while(findNode.next !== null){
             console.log(findNode.element)
             findNode = findNode.next
         }

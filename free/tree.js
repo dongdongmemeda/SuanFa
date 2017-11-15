@@ -12,25 +12,25 @@ const nodes = {
 let arr = []
 const xxDfs = function (nodes){
     arr.push(nodes.node)
-    nodes.left && dfs(nodes.left)
-    nodes.right && dfs(nodes.right)
+    nodes.left && xxDfs(nodes.left)
+    nodes.right && xxDfs(nodes.right)
 }
 xxDfs(nodes)
 console.log(arr)
 //  二叉树中序遍历
 arr = []
 const zxDfs = function (nodes){
-    nodes.left && dfs(nodes.left)
+    nodes.left && zxDfs(nodes.left)
     arr.push(nodes.node)
-    nodes.right && dfs(nodes.right)
+    nodes.right && zxDfs(nodes.right)
 }
 zxDfs(nodes)
 console.log(arr)
 //  二叉树后序遍历
 arr = []
 const hxDfs = function (nodes){
-    nodes.left && dfs(nodes.left)
-    nodes.right && dfs(nodes.right)
+    nodes.left && hxDfs(nodes.left)
+    nodes.right && hxDfs(nodes.right)
     arr.push(nodes.node)
 }
 hxDfs(nodes)

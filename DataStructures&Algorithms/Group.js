@@ -12,7 +12,7 @@ Group.prototype = {
     constructor: Group,
     add: function(val){
         const dps = this.data.indexOf(val)
-        if(dps == -1){
+        if(dps === -1){
             this.data.push(val)
             ++this.size
         }
