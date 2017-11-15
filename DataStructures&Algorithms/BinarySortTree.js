@@ -82,26 +82,28 @@ BST.prototype = {
     },
     //  获取最小值
     getMin: function(){
-        let min = this.root ? this.minLoop(this.root) : null
+        let min = this.root ? this.minLoop(this.root).data : null
         return min
     },
+    //  获取最小值节点
     minLoop: function(node){
         if(node.left){
             return this.minLoop(node.left)
         }else{
-            return node.data
+            return node
         }
     },
     //  获取最大值
     getMax: function(){
-        let max = this.root ? this.maxLoop(this.root) : null
+        let max = this.root ? this.maxLoop(this.root).data : null
         return max
     },
+    //  获取最大值节点
     maxLoop: function(node){
         if(node.right){
             return this.maxLoop(node.right)
         }else{
-            return node.data
+            return node
         }
     },
     //  寻找定值节点
@@ -109,7 +111,7 @@ BST.prototype = {
         let node = this.root ? this.findLoop(this.root, data) : null
         return node
     },
-    findLoop: function(node,data){
+    findLoop: function(node, data){
         if(node.data < data){
             if(node.right){
                 return this.findLoop(node.right, data)
@@ -120,6 +122,47 @@ BST.prototype = {
             }
         }else{
             return node
+        }
+    },
+    //  删除节点
+    remove: function(data){
+        this.root = this.root ? this.removeLoop(this.root, data) : null
+    },
+    //  删除节点的循环
+    removeLoop: function(node, data){
+        if(node.data < data){
+            //  赋值新的左子树，返回新节点
+            node.right = this.removeLoop(node.right, data)
+            return node
+        }else if(node.data > data){
+            //  赋值新的右子树，返回节点
+            node.left = this.removeLoop(node.left, data)
+            return node
+        }else{
+            //  没有左子树和右子树
+            if(node.left === null && node.right === null){
+                return null
+            }
+            //  只有右子树
+            if(node.left === null && node.right !== null){
+                return node.right
+            }
+            //  只有左子树
+            if(node.left !== null && node.right === null){
+                return node.left
+            }
+            //  左子树和右子树都有
+            if(node.left !== null && node.right !== null){
+                //  获取右子树最小值节点，节点数据代替被删掉的节点,节点的子树接在被删掉的右子树上
+                let minNode = this.minLoop(node.right)
+                node.data = minNode.data
+                node.right = this.removeLoop(node.right, minNode.data)
+                //  同理，获取左子树最大值节点，节点数据代替被删掉的节点,节点的子树接在被删掉的左子树上
+                // let maxNode = this.maxLoop(node.left)
+                // node.data = maxNode.data
+                // node.left = this.removeLoop(node.left, maxNode.data)
+                return node
+            }
         }
     }
 }
