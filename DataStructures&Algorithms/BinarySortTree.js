@@ -4,7 +4,6 @@
  *  desc: 二叉查找树<数据结构>
 */
 //  构造函数模式和原型模式创造二叉查找树
-
 //  定义节点
 function Node(data, left, right){
     this.data = data    //  二叉树的数据
@@ -13,8 +12,7 @@ function Node(data, left, right){
 }
 //  定义二叉查找树
 function BST(){
-    this.root = null    //  根节点
-    this.sort = []
+    this.root = null    //  根元素
 }
 BST.prototype = {
     constructor: BST,
@@ -27,54 +25,85 @@ BST.prototype = {
         }else{
             let root = this.root, parent = null
             //  遍历二叉树，找到合适的地方插入
-            this.loop(data, root, parent, node)
+            this.insertLoop(data, root, parent, node)
         }
     },
     //  递归遍历二叉树
-    loop: function(data, root, parent, node){
+    insertLoop: function(data, root, parent, node){
         parent = root
         if(data < root.data){
             root = root.left  //  数据比该根节点的数据小，往左子树寻找
             if(root === null){  //  左子树如果为空，插入节点
                 parent.left = node
-                return
+            }else{
+                this.insertLoop(data, root, parent, node)
             }
         }else{
             root = root.right  //  数据比该根节点的数据大，往右子树查找
             if(root === null){  //  右子树如果为空，插入节点
                 parent.right = node
-                return
+            }else{
+                this.insertLoop(data, root, parent, node)
             }
         }
-        this.loop(data, root, parent, node)
     },
     //  先序遍历二叉树
-    rootFirst: function(node){
-        if(node !== null){
-            this.sort.push(node.data)
-            node.left && this.rootFirst(node.left)
-            node.right && this.rootFirst(node.right)
-        }
-        return this.sort.toString()
+    rootFirst: function(){
+        let arr = []
+        this.root && this.firstLoop(this.root, arr)
+        return arr
+    },
+    firstLoop: function(node, arr){
+        arr.push(node.data)
+        node.left && this.firstLoop(node.left, arr)
+        node.right && this.firstLoop(node.right, arr)
     },
     //  中序遍历二叉树
-    rootMiddle: function(node){
-        if(node !== null){
-            node.left && this.rootMiddle(node.left)
-            this.sort.push(node.data)
-            node.right && this.rootMiddle(node.right)
-        }
-        return this.sort.toString()
+    rootMiddle: function(){
+        let arr = []
+        this.root && this.middleLoop(this.root, arr)
+        return arr
+    },
+    middleLoop: function(node, arr){
+        node.left && this.middleLoop(node.left, arr)
+        arr.push(node.data)
+        node.right && this.middleLoop(node.right, arr)
     },
     //  后序遍历二叉树
-    rootLast: function(node){
-        if(node !== null){
-            node.left && this.rootLast(node.left)
-            node.right && this.rootLast(node.right)
-            this.sort.push(node.data)
+    rootLast: function(){
+        let arr = []
+        this.root && this.lastLoop(this.root, arr)
+        return arr
+    },
+    lastLoop: function(node, arr){
+        node.left && this.lastLoop(node.left, arr)
+        node.right && this.lastLoop(node.right, arr)
+        arr.push(node.data)
+    },
+    //  获取最小值
+    getMin: function(){
+        let min = this.root ? this.minLoop(this.root) : null
+        return min
+    },
+    minLoop: function(node){
+        if(node.left){
+            return this.minLoop(node.left)
+        }else{
+            return node.data
         }
-        return this.sort.toString()
-    }
+    },
+    //  获取最大值
+    getMax: function(){
+        let max = this.root ? this.maxLoop(this.root) : null
+        return max
+    },
+    maxLoop: function(node){
+        if(node.right){
+            return this.maxLoop(node.right)
+        }else{
+            return node.data
+        }
+    },
 }
 
 const bst = new BST()
