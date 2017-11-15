@@ -1,7 +1,7 @@
 /**
  *  author: 蔡东
  *  createdOn: 2017/11/15
- *  desc: 二叉查找树<数据结构>
+ *  desc: 二叉排序树<数据结构>
 */
 //  构造函数模式和原型模式创造二叉查找树
 //  定义节点
@@ -110,9 +110,7 @@ BST.prototype = {
     //  寻找定值节点
     find: function(data){
         let node = this.root ? this.findLoop(this.root, data) : 'no found'
-        if(node === undefined){
-            node = 'no found'
-        }
+        node = node === undefined? 'no found' : node
         return node
     },
     findLoop: function(node, data){
@@ -138,7 +136,6 @@ BST.prototype = {
             return '404 error because no found'
         }
     },
-    //  删除节点的循环
     removeLoop: function(node, data){
         if(node.data < data){
             //  赋值新的左子树，返回新节点
@@ -176,22 +173,42 @@ BST.prototype = {
         }
     },
     //  统计节点个数
-    rootCount: function(){
-        let num = 0
-        num = this.root ? this.rootLoop(this.root, ++num) : 0
+    count: function(){
+        let num = this.root ? this.rootLoop(this.root, 1) : 0
         return num
     },
-    //  寻找节点个数的循环
     rootLoop: function(node, num){
-        if(node.left){
+        node.left && (num=this.rootLoop(node.left, ++num))
+        node.right && (num=this.rootLoop(node.right, ++num))
+        return num
+    },
+    //  统计二叉树终节点
+    dest: function(){
+        let num = this.root ? this.destLoop(this.root, 0) : 0
+        return num
+    },
+    destLoop: function(node, num){
+        node.left && (num+=this.destLoop(node.left, 0))
+        node.right && (num+=this.destLoop(node.right, 0))
+        if(node.left === null && node.right === null){
             ++num
-            num = this.rootLoop(node.left, num)
-        }
-        if(node.right){
-            ++num
-            num = this.rootLoop(node.right, num)
         }
         return num
+    },
+    //  计算二叉树深度
+    deep: function(){
+        let len = this.root ? this.deepLoop(this.root, 1) : 0
+        return len
+    },
+    deepLoop: function(node, n){
+        let l = n, r = n
+        if(node.left){
+            l = this.deepLoop(node.left, ++l)
+        }
+        if(node.right){
+            r = this.deepLoop(node.right, ++r)
+        }
+        return Math.max(l, r)
     }
 }
 
