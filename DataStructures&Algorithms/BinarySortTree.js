@@ -27,6 +27,7 @@ BST.prototype = {
             //  遍历二叉树，找到合适的地方插入
             this.insertLoop(data, root, parent, node)
         }
+        return 'insert success'
     },
     //  递归遍历二叉树
     insertLoop: function(data, root, parent, node){
@@ -108,7 +109,10 @@ BST.prototype = {
     },
     //  寻找定值节点
     find: function(data){
-        let node = this.root ? this.findLoop(this.root, data) : null
+        let node = this.root ? this.findLoop(this.root, data) : 'no found'
+        if(node === undefined){
+            node = 'no found'
+        }
         return node
     },
     findLoop: function(node, data){
@@ -126,7 +130,13 @@ BST.prototype = {
     },
     //  删除节点
     remove: function(data){
-        this.root = this.root ? this.removeLoop(this.root, data) : null
+        const node = this.find(data)
+        if(node !== 'no found'){
+            this.root = this.root ? this.removeLoop(this.root, data) : null
+            return 'remove success'
+        }else{
+            return '404 error because no found'
+        }
     },
     //  删除节点的循环
     removeLoop: function(node, data){
@@ -164,6 +174,24 @@ BST.prototype = {
                 return node
             }
         }
+    },
+    //  统计节点个数
+    rootCount: function(){
+        let num = 0
+        num = this.root ? this.rootLoop(this.root, ++num) : 0
+        return num
+    },
+    //  寻找节点个数的循环
+    rootLoop: function(node, num){
+        if(node.left){
+            ++num
+            num = this.rootLoop(node.left, num)
+        }
+        if(node.right){
+            ++num
+            num = this.rootLoop(node.right, num)
+        }
+        return num
     }
 }
 
