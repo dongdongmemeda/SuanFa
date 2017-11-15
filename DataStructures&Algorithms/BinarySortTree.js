@@ -104,6 +104,24 @@ BST.prototype = {
             return node.data
         }
     },
+    //  寻找定值节点
+    find: function(data){
+        let node = this.root ? this.findLoop(this.root, data) : null
+        return node
+    },
+    findLoop: function(node,data){
+        if(node.data < data){
+            if(node.right){
+                return this.findLoop(node.right, data)
+            }
+        }else if(node.data > data){
+            if(node.left){
+                return this.findLoop(node.left, data)
+            }
+        }else{
+            return node
+        }
+    }
 }
 
 const bst = new BST()
