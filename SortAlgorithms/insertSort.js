@@ -6,12 +6,12 @@
 
 function insertSort(arr){
 	for(let i=1;i<arr.length;i++){
-		let temp = arr[i], j = i
-		while(arr[j-1]>=temp && j>0){
+		let tmp = arr[i], j = i
+		while(arr[j-1]>=tmp && j>=1){
 			arr[j] = arr[j-1]
 			--j
 		}
-		arr[j] = temp
+		arr[j] = tmp
 	}
 	return arr
 }

@@ -9,14 +9,13 @@
      //  遍历间隔序列
      for(let g=0;g<gps.length;g++){
          for(let i=gps[g];i<arr.length;i++){
-             let tmp = arr[i], k
-             for(let j=i;j>=gps[g] && arr[j-gps[g]]>tmp;j -= gps[g]){
+             let tmp = arr[i], j = i
+             while(arr[j-gps[g]]>tmp && j>=gps[g]){
                  arr[j] = arr[j-gps[g]]
-                 k = j
+                 j -= gps[g]
              }
-             arr[k-gps[g]] = tmp
+             arr[j] = tmp
          }
      }
      return arr
  }
- 
