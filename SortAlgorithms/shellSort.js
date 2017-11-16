@@ -1,7 +1,7 @@
 /**
  *  author: caidong
  *  createdOn: 2017/11/16
- *  desc: 希尔排序
+ *  desc: 希尔排序（插入排序升级版）
  */
 
  const gps = [5, 3, 1]    //  希尔排序的间隔系列

@@ -1,7 +1,7 @@
 /**
  *  author: caidong
  *  createdOn: 2017/10/23
- *  desc: 插入排序
+ *  desc: 直接插入排序
  */
 
 function insertSort(arr){
