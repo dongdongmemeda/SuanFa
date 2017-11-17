@@ -10,6 +10,8 @@ function Graph(v){
     this.adj = []    //  记录每个节点之间的边
     this.marked = []    //  记录每个节点的被访问记录
     this.edgeTo = []    //  记录路径
+    this.start = null    //  绝对起点
+    this.begin = null    //  相对起点
     for(let i=0;i<this.vertices;i++){
         //  初始化每个节点之间的边，每个节点的被访问记录
         this.adj[i] = []
@@ -20,6 +22,9 @@ Graph.prototype = {
     constructor: Graph,
     //  添加两个节点的边
     add: function(v, w){
+        if(this.start === null){
+            this.start = v
+        }
         this.adj[v].push(w)
         this.adj[w].push(v)
         this.edges++
@@ -48,6 +53,7 @@ Graph.prototype = {
     },
     //  搜索图（广度优先搜索）
     bfs: function(s){
+        this.begin = s
         this.marked[s] = true
         let queue = []
         queue.push(s)
@@ -63,16 +69,16 @@ Graph.prototype = {
             }
         }
     },
-    //  连接节点路径，广度优先搜索的最短路径，先使用广度优先搜索从起点遍历，然后再查找起点到某个值的最短路径
+    //  连接节点路径，广度优先搜索的最短路径，先使用广度优先搜索从起点遍历，然后再查找相对起点到某个节点的最短路径
     path: function(v){
-        let source = 0, pathTo = [], sum =''
+        let pathTo = [], sum =''
         if(!this.marked[v]){
             return undefined
         }
-        for(let i=v;i!==source;i=this.edgeTo[i]){
+        for(let i=v;i!==this.begin;i=this.edgeTo[i]){
             pathTo.push(i)
         }
-        pathTo.push(source)
+        pathTo.push(this.begin)
         while(pathTo.length>0){
             if(pathTo.length === 1){
                 sum += pathTo.pop()
@@ -87,6 +93,7 @@ Graph.prototype = {
         for(let i=0;i<this.vertices;i++){
             this.marked[i] = false
             this.edgeTo = []
+            this.begin = null
         }
     }
 }
