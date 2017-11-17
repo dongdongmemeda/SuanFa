@@ -1,6 +1,6 @@
 /**
  *  author: 蔡东
- *  createdOn: 2017/11/16
+ *  createdOn: 2017/11/17
  *  desc: 图<数据结构>
 */
 //  构造函数模式和原型模式创造图
@@ -11,10 +11,12 @@ function Vertex(node, visited){
 function Graph(v){
     this.vertices = v    //  节点个数
     this.edges = 0    //  边的个数
-    this.adj = []
-    //  初始化每个节点之间的边
+    this.adj = []    //  记录每个节点之间的边
+    this.marked = []    //  记录每个节点的被访问记录
     for(let i=0;i<this.vertices;i++){
+        //  初始化每个节点之间的边，每个节点的被访问记录
         this.adj[i] = []
+        this.marked[i] = false
     }
 }
 Graph.prototype = {
@@ -33,6 +35,21 @@ Graph.prototype = {
                 }
             }
             console.log(`${i} -> ${sum}`)
+        }
+    },
+    //  搜索图（深度优先搜索）
+    dfs: function(v){
+        this.marked[v] = true
+        console.log(`Visited vertex: ${v}`)
+        for(let w of this.adj[v]){
+            if(!this.marked[w]){
+                this.dfs(w)
+            }
+        }
+    },
+    reset: function(){
+        for(let i=0;i<this.vertices;i++){
+            this.marked[i] = false
         }
     }
 }
