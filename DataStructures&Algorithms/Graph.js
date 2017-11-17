@@ -95,5 +95,9 @@ Graph.prototype = {
             this.edgeTo = []
             this.begin = null
         }
-    }
+    },
+    //  拓扑排序
+    topSort: function(){},
+    //  拓扑排序辅助函数
+    topSortHelper: function(){}
 }
