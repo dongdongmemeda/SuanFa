@@ -47,6 +47,22 @@ Graph.prototype = {
             }
         }
     },
+    //  搜索图（广度优先搜索）
+    bfs: function(s){
+        this.marked[s] = true
+        let queue = []
+        queue.push(s)
+        while(queue.length>0){
+            let v = queue.shift()
+            console.log(`Visited vertex: ${v}`)
+            for(let w of this.adj[v]){
+                if(!this.marked[w]){
+                    this.marked[w] = true
+                    queue.push(w)
+                }
+            }
+        }
+    },
     reset: function(){
         for(let i=0;i<this.vertices;i++){
             this.marked[i] = false
