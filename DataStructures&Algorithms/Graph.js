@@ -13,6 +13,7 @@ function Graph(v){
     this.edges = 0    //  边的个数
     this.adj = []    //  记录每个节点之间的边
     this.marked = []    //  记录每个节点的被访问记录
+    this.edgeTo = []    //  记录最短路径
     for(let i=0;i<this.vertices;i++){
         //  初始化每个节点之间的边，每个节点的被访问记录
         this.adj[i] = []
@@ -57,15 +58,36 @@ Graph.prototype = {
             console.log(`Visited vertex: ${v}`)
             for(let w of this.adj[v]){
                 if(!this.marked[w]){
+                    this.edgeTo[w] = v
                     this.marked[w] = true
                     queue.push(w)
                 }
             }
         }
     },
+    //  连接节点路径，广度优先搜索的最短路径，先使用广度优先搜索从起点遍历，然后再查找起点到某个值的最短路径
+    path: function(v){
+        let source = 0, pathTo = [], sum =''
+        if(!this.marked[v]){
+            return undefined
+        }
+        for(let i=v;i!==source;i=this.edgeTo[i]){
+            pathTo.push(i)
+        }
+        pathTo.push(source)
+        while(pathTo.length>0){
+            if(pathTo.length === 1){
+                sum += pathTo.pop()
+            }else{
+                sum += `${pathTo.pop()}->`
+            }
+        }
+        console.log(sum)
+    },
     reset: function(){
         for(let i=0;i<this.vertices;i++){
             this.marked[i] = false
+            this.edgeTo = []
         }
     }
 }
