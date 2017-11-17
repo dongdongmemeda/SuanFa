@@ -4,16 +4,12 @@
  *  desc: 图<数据结构>
 */
 //  构造函数模式和原型模式创造图
-function Vertex(node, visited){
-    this.node = node
-    this.visited = visited
-}
 function Graph(v){
     this.vertices = v    //  节点个数
     this.edges = 0    //  边的个数
     this.adj = []    //  记录每个节点之间的边
     this.marked = []    //  记录每个节点的被访问记录
-    this.edgeTo = []    //  记录最短路径
+    this.edgeTo = []    //  记录路径
     for(let i=0;i<this.vertices;i++){
         //  初始化每个节点之间的边，每个节点的被访问记录
         this.adj[i] = []
@@ -22,11 +18,13 @@ function Graph(v){
 }
 Graph.prototype = {
     constructor: Graph,
+    //  添加两个节点的边
     add: function(v, w){
         this.adj[v].push(w)
         this.adj[w].push(v)
         this.edges++
     },
+    //  显示节点之间边的情况
     show: function(){
         for(let i=0;i<this.vertices;i++){
             let sum = ''
@@ -84,6 +82,7 @@ Graph.prototype = {
         }
         console.log(sum)
     },
+    //  重置被访问记录和路径
     reset: function(){
         for(let i=0;i<this.vertices;i++){
             this.marked[i] = false
