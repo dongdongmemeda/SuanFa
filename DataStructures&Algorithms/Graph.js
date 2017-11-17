@@ -83,7 +83,7 @@ Graph.prototype = {
             if(pathTo.length === 1){
                 sum += pathTo.pop()
             }else{
-                sum += `${pathTo.pop()}->`
+                sum += `${pathTo.pop()} -> `
             }
         }
         console.log(sum)
@@ -97,6 +97,3 @@ Graph.prototype = {
         }
     }
 }
-
-let vertices = 5
-const g = new Graph(vertices)
