@@ -33,8 +33,4 @@
 
     concatObj.js: 深度合并不确定数量的对象（可以实现对象深拷贝）
     narcissistic.js: 水仙花数
-    
-###  服务器外部文件说明
-
     dong.js: 一行代码黑科技
-    
